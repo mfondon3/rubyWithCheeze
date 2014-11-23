@@ -1,0 +1,7 @@
+- site: pardot
+  nickname: local
+  domain: pi.localhost
+
+- site: pardot
+  nickname: dev
+  domain: app.dev.pardot

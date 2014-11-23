@@ -1,0 +1,2 @@
+- name: sign in
+  url: http://pi.localhost.com
