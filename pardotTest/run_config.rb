@@ -1,7 +1,7 @@
 require 'yaml.rb'
 
 class RunConfig
-  Sites = ['pardot']
+  Sites = ['gmail', 'bofa', 'pardot']
   Domains = YAML::load( File.open('domain.yml'))
   Default_browser= 'chrome'
   Default_domain_nickname = 'local'

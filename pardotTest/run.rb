@@ -49,6 +49,12 @@ ARGV.each_with_index do |arg, index|
     when '-h' || '--help' then
       puts usage
       exit
+    when '-u' then
+      options[:username] = ARGV[index + 1]
+      ARGV.delete_at(index + 1)
+    when '-p' then
+      options[:password] = ARGV[index + 1]
+      ARGV.delete_at(index + 1)
     when '-d'  then
       options[:domain] = ARGV[index + 1]
       ARGV.delete_at(index + 1)
@@ -78,28 +84,28 @@ def usage
   put "Usage: ruby run.rb [options] <site> [cucumber options]"
 end
 
-if(options[:browser] == 'ie')
-  puts "HERE1"
+if options[:browser] == 'ie'
   browser = :ie
-elsif(options[:browser] == 'ff')
-  puts "HERE2"
+elsif options[:browser] == 'ff'
   browser = :ff
-elsif(options[:browser] == 'chrome')
-  puts "HERE3"
+elsif options[:browser] == 'chrome'
   browser = :chrome
 end
+
+username = options[:username]
+password = options[:password]
 
 #--------------------
 
 #domain = RunConfig::Domains.detect{ |i| puts puts i['nickname']==RunConfig::Default_domain_nickname && i['site']==site }#['domain']
 #d = RunConfig::Domains.detect{ |i| i['nickname']==options[:domain] && i['site']==site }
-case options[:domain]
-  when "localhost"
-    domain = "pi.localhost.com"
-  when "app_dev"
-    domain = "app.dev.pardot.com"
+case site
+  when "gmail"
+    domain = "www.gmail.com"
+  when "bofa"
+    domain = "www.bofa.com"
   else
-    domain = "pi.localhost.com"
+    domain = nil
 end
 
 # if(!options[:domain].nil? && d.nil?)
@@ -123,12 +129,13 @@ end
 
 Dir.chdir(site) do
   if(!options[:profile].nil?)
-    exit(system("rake default[#{browser},#{domain}]"))
+    #exit(system("rake default[#{browser},#{domain}]"))
   elsif(!cucumber_ops.empty?)
-    exit(system("rake custom[#{browser},#{domain},#{cucumber_ops.join('_')}]"))
+    exit(system("rake custom[#{browser},#{domain},#{username},#{password},#{cucumber_ops.join('_')}]"))
+    #exit(system("rake custom[#{browser},#{username},#{password},#{cucumber_ops.join('_')}]"))
   else
     if(!site.nil?)
-      exit(system("rake all[#{browser},#{domain}]"))
+     # exit(system("rake all[#{browser},#{domain}]"))
     else
       puts "Something went wrong!"
     end

@@ -1,16 +1,6 @@
-Given(/^I am an? (.+) user$/) do | role |
-	case role
-	when "engineer"
-		$user = UserCredentials.new(login: "engineer@pardot.com", password: "pardot07")
-	when "marketing"
-	when "administrator"
-	else
-		$user = UserCredentials.new(login: "coordinator@pardot.com", password: "coordinator")
-	end 
-end
+And(/^I sign in$/) do
+	$account_login_page.login_with $user.login, $user.password
 
-And(/^I am signed in$/) do
-	$sign_in_page.login($user.login,$user.password)
 end
 
 When(/^I navigate to the Landing Page page$/) do
@@ -23,3 +13,4 @@ And(/^I create a new landing page$/) do
 	$landing_pages_wizard1_page.chooseDefaultCampaign
 	#$landing_pages_wizard1_page.choose_campaign_button.click
 end
+

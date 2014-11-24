@@ -1,0 +1,26 @@
+require 'rubygems'
+require 'cucumber/rake/task'
+require "watir-webdriver"
+
+
+task :default, :browser, :domain do |t, args|
+
+  Cucumber::Rake::Task.new(:default) do |t|
+    t.cucumber_opts = "BROWSER=#{args[:browser]} DOMAIN=#{args[:domain]}"
+  end
+
+end
+
+task :custom, :browser, :domain, :cucumberoptions  do |t, args|
+  Cucumber::Rake::Task.new(:custom) do |t|
+    t.cucumber_opts = "BROWSER=#{args[:browser]} DOMAIN=#{args[:domain]} #{args[:cucumberoptions].split('_').join(" ")}"
+  end
+
+end
+
+task :all, :browser, :domain do |t, args|
+  Cucumber::Rake::Task.new(:all) do |t|
+    t.cucumber_opts = "BROWSER=#{args[:browser]} DOMAIN=#{args[:domain]}"
+  end
+
+end
