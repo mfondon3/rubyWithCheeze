@@ -5,7 +5,11 @@ end
 require "rubygems"
 require "watir-webdriver"
 require "page-object"
+require "page-object/page_factory"
 
+World(PageObject::PageFactory)
+
+=begin
 case ENV['BROWSER']
 when "ff"
   $driver = Selenium::WebDriver.for :firefox, :profile => "default"
@@ -15,20 +19,13 @@ when "chrome"
   #$driver = Selenium::WebDriver.for :chrome
 end
 
+
 #@browser = Browser.new(Watir::Browser.new($driver))
-@browser = Watir::Browser.new :chrome
+=end
+#@browser = Watir::Browser.new :chrome
 
 
 $user = UserCredentials.new(login: ENV['USERNAME'], password: ENV['PASSWORD'])
-
-
-
-
-Dir["features/pages/**/*.rb"].each do |file|
-  if file.include?("base")
-    require file
-  end
-end
 
 
 Dir["../config/pages/**/*.rb"].each do |file|
@@ -37,6 +34,7 @@ end
 
 
 Dir["features/pages/**/*.rb"].each do |file|
+  puts file
   require File.expand_path(file)
 end
 
@@ -45,7 +43,7 @@ end
 # unless system(ENV['IMPORT']) == true
 #   raise "Unable to import stock data."
 # end
-@browser.goto(ENV['DOMAIN'])
+#@browser.goto(ENV['DOMAIN'])
 
 
 
@@ -58,4 +56,3 @@ def take_screenshot_if_failed(scenario)
   #  Win32::Screenshot::Take.of(:window, :title => /ScoreBig/).write(screenshot_path)
   #end
 end
-

@@ -1,0 +1,5 @@
+- name: landing pages
+  url: http://DOMAIN/landingPage/landingPages
+
+- name: landing pages wizard1
+  url: http://DOMAIN/landingPage/wizardStep1?

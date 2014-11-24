@@ -104,6 +104,8 @@ case site
     domain = "www.gmail.com"
   when "bofa"
     domain = "www.bofa.com"
+  when "puppies"
+    domain = "http://puppies.herokuapp.com"
   else
     domain = nil
 end
@@ -131,8 +133,8 @@ Dir.chdir(site) do
   if(!options[:profile].nil?)
     #exit(system("rake default[#{browser},#{domain}]"))
   elsif(!cucumber_ops.empty?)
-    exit(system("rake custom[#{browser},#{domain},#{username},#{password},#{cucumber_ops.join('_')}]"))
-    #exit(system("rake custom[#{browser},#{username},#{password},#{cucumber_ops.join('_')}]"))
+    #exit(system("rake custom[#{browser},#{domain},#{username},#{password},#{cucumber_ops.join('_')}]"))
+    exit(system("rake custom[#{browser},#{domain},#{cucumber_ops.join('_')}]"))
   else
     if(!site.nil?)
      # exit(system("rake all[#{browser},#{domain}]"))
