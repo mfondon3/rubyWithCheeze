@@ -8,7 +8,7 @@ class HomePage
 
   page_url "http://puppies.herokuapp.com"
 
-  def select_puppy(name)
+  def select_puppy(name = 'Brook')
     index = puppy_index_for name
     button_element(:value => 'View Details', :index => index).click
   end

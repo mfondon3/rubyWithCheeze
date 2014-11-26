@@ -1,0 +1,5 @@
+checkout_page:
+      name: Cheezy
+      address: 123 Main Street
+      email: cheezy@example.com
+      pay_type: Check

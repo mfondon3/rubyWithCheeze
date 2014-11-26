@@ -2,10 +2,11 @@ Dir["../global/**/*.rb"].sort_by {|f| f.count("/")}.each do |file|
   require file
 end
 
-require "rubygems"
-require "watir-webdriver"
-require "page-object"
-require "page-object/page_factory"
+require 'rubygems'
+require 'watir-webdriver'
+require 'page-object'
+require 'page-object/page_factory'
+require 'data_magic'
 
 World(PageObject::PageFactory)
 

@@ -32,3 +32,34 @@ Feature: Landing Pages
    And I select "Credit card" from the pay with dropdown
    And I click the Place Order button
    Then I should see "Thank you for adopting a puppy!"
+
+  @three
+  Scenario: Adopting one puppy
+    When I click the View Details button for "Brook"
+    And I click the Adopt Me button
+    And I click the Complete the Adoption button
+    And I complete the adoption with:
+      |  name  |     address     |       email        | pay_type |
+      | Cheezy | 123 Main Street | cheezy@example.com |  Check   |
+    Then I should see "Thank you for adopting a puppy!"
+
+  @four
+  Scenario: Adopting a puppy using partial default data
+    When I click the View Details button for "Brook"
+    And I click the Adopt Me button
+    And I click the Complete the Adoption button
+    And I complete the adoption using a Credit card
+    Then I should see "Thank you for adopting a puppy!"
+
+  @five
+  Scenario: Adopting a puppy using all default data
+    When I click the View Details button for "Brook"
+    And I click the Adopt Me button
+    And I click the Complete the Adoption button
+    And I complete the adoption
+    Then I should see "Thank you for adopting a puppy!"
+
+  @six
+  Scenario: Adopting a puppy using partial default data
+    When I complete the adoption of a puppy
+    Then I should see "Thank you for adopting a puppy!"

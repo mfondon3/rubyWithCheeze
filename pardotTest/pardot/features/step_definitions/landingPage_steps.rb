@@ -1,11 +1,11 @@
 Given(/^I am an? (.+) user$/) do | role |
 	case role
 	when "engineer"
-		$user = UserCredentials.new(login: "engineer@pardot.com", password: "pardot07")
+		$user = UserCredentials.new(login: "", password: "")
 	when "marketing"
 	when "administrator"
 	else
-		$user = UserCredentials.new(login: "coordinator@pardot.com", password: "coordinator")
+		$user = UserCredentials.new(login: "", password: "")
 	end 
 end
 

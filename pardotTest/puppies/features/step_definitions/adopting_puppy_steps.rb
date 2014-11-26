@@ -43,18 +43,37 @@ When(/^I click the Place Order button$/) do
 	on_page(CheckoutPage).place_order
 end
 
+When /^I complete the adoption with:$/ do |table|
+	on_page(CheckoutPage).checkout(table.hashes.first)
+end
+
+And(/^I complete the adoption using a Credit card$/) do
+	on_page(CheckoutPage).checkout(:pay_type => 'Credit card')
+end
+
+When /^I complete the adoption$/ do
+	on_page(CheckoutPage).checkout
+end
+
+When(/^I complete the adoption of a puppy$/) do
+	on_page(HomePage).select_puppy
+	on_page(DetailPage).add_to_cart
+	on_page(ShoppingCartPage).proceed_to_checkout
+	on_page(CheckoutPage).checkout
+end
+
 Then(/^I should see "(.*?)"$/) do |expected|
-	@current_page.text.should include expected
+	expect(@current_page.text).to include expected
 end
 
 Then /^I should see "([^"]*)" as the name for (line item \d+)$/ do |name,line_item|
-	on_page(ShoppingCartPage).name_for_line_item(line_item).should include name
+	expect(on_page(ShoppingCartPage).name_for_line_item(line_item)).to include name
 end
 
 When /^I should see "([^"]*)" as the subtotal for (line item \d+)$/ do |subtotal,line_item|
-		on_page(ShoppingCartPage).subtotal_for_line_item(line_item).should == subtotal
+		expect(on_page(ShoppingCartPage).subtotal_for_line_item(line_item)).to eq( subtotal)
 end
 
 When /^I should see "([^"]*)" as the cart total$/ do |total|
-	on_page(ShoppingCartPage).cart_total.should == total
+	expect(on_page(ShoppingCartPage).cart_total).to eq(total)
 end
